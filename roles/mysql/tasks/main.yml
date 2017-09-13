@@ -1,0 +1,22 @@
+- name: "Installing mysql"
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - mysql-server
+  - mysql-client
+  - libmysqlclient-dev
+
+- name: Install the MySQL-python through pip
+  pip:
+    name: "{{ item }}"
+    state: forcereinstall
+  with_items:
+    - pip
+    - MySQL-python
+
+- name: update mysql root password for all root accounts
+  mysql_user: name=root host={{ item }} password={{ mysql_root_db_pass }}
+  with_items:
+   - 127.0.0.1
+   - ::1
+   - localhost
+

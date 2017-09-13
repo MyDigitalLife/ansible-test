@@ -1,0 +1,9 @@
+- name: "Installing basic software"
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - git
+  - nano
+
+- name: "Include vars"
+  include_vars:
+    file: ./../../../vars/main.yml

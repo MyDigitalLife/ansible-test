@@ -1,0 +1,9 @@
+- name: "Installing nginx"
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - nginx
+
+- name: "Copy nginx config"
+  copy:
+    src: ./../files/testproject.cnf
+    dest: /etc/nginx/sites-enabled/testproject.cnf
